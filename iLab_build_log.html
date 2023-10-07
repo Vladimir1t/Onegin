@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>iLab build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>22-09-2023 at 12:40.16</u><br />
+Build ended on: <u>22-09-2023 at 12:40.16</u><p />
+<b>-------------- Build: Debug in iLab (compiler: GNU GCC Compiler)---------------</b><br />
+gcc.exe -Wall -g  -c "C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c" -o obj\Debug\main.o<br />
+C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c: In function 'main':<br />
+<font color="#0000ff">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:7:5: warning: format '%d' expects argument of type 'int *', but argument 2 has type 'int' [-Wformat=]</font><br />
+     scanf("%d", size);<br />
+     ^<br />
+<font color="#ff0000">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:9:5: error: 'for' loop initial declarations are only allowed in C99 mode</font><br />
+     for (int i = 0; i &lt; size; i++)<br />
+     ^<br />
+C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:9:5: note: use option -std=c99 or -std=gnu99 to compile your code<br />
+<font color="#0000ff">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:11:9: warning: format '%lg' expects argument of type 'double *', but argument 2 has type 'int *' [-Wformat=]</font><br />
+         scanf("%lg", p + i);<br />
+         ^<br />
+<font color="#ff0000">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:14:5: error: 'for' loop initial declarations are only allowed in C99 mode</font><br />
+     for (int j = 0; j &lt; size; j++)<br />
+     ^<br />
+<font color="#0000ff">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:16:9: warning: format '%lg' expects argument of type 'double', but argument 2 has type 'int' [-Wformat=]</font><br />
+         printf("%lg", p[j]);<br />
+         ^<br />
+<font color="#0000ff">C:\Users\vovav\OneDrive\Рабочий стол\iLab\main.c:20:1: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+<font color="#a00000">Process terminated with status 1 (0 minute(s), 0 second(s))</font><br />
+<font color="#a00000">2 error(s), 4 warning(s) (0 minute(s), 0 second(s))</font><br />
+</tt>
+</body>
+</html>

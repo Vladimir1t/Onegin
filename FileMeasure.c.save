@@ -1,0 +1,13 @@
+#include "FileMeasure.h"
+
+int FileMeasure (FILE* const fPointer) // if change const and file, program won't work
+{
+    assert (fPointer != NULL);
+    size_t len = 0;
+    fseek (fPointer, 0, SEEK_END);
+    len = (size_t) ftell (fPointer);
+
+    rewind (fPointer);
+
+    return len;
+}
