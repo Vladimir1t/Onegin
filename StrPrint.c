@@ -1,51 +1,41 @@
 #include "StrPrint.h"
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/);
-void SortedStrPrintEnding (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/);
+void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod);
 void PrintSymbols (char* textPointer, int const size);
 void Putchar (char a);
 
-void StrPrint (int const nStrings, struct Strings* stringsP/*char** const strPointer,int* stringSizeP*/)
+void StrPrint (int const nStrings, struct Strings* const stringsP)
 {
     for (size_t n = 0; n < nStrings; n++)
     {
         printf ("%d) %s\n", n + 1, stringsP[n].pointer);
-        //stringSizeP[n] = strlen(strPointer[n]);
-        // printf ("string length: %d\n", stringSizeP[n]);
+        //printf ("string length: %d\n", stringsP[n].size);
     }
 }
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/)
+void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod, char* fileName)
 {
-    printf ("-Strings are sorted by the alphabetic order-\n");
-    FILE* filePointerNew = fopen ("Onegin1.txt", "w");   // get name from command line
+    FILE* filePointerNew = fopen (fileName, "w");   // get name from command line
+    if (mod == BEGINNING)
+        printf ("-Strings are sorted by the alphabetic order-\n");
+    else if (mod == ENDING)
+        printf ("-Strings are sorted by the alphabetic order of the end of the lines-\n");
+    else
+        printf ("Error.");
+
     for (int n = 0; n < nStrings; n++)
     {
         fputs (stringsP[n].pointer, filePointerNew);
         fputc ('\n', filePointerNew);
     }
 
-    StrPrint (nStrings, stringsP/*strPointer, stringSizeP*/);
-}
-
-void SortedStrPrintEnding (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/)
-{
-    printf ("-Strings are sorted by the alphabetic order of the end of the lines-\n");
-    FILE* filePointerNew = fopen ("Onegin2.txt", "w");   // command line
-    for (int n = 0; n < nStrings; n++)
-    {
-        fputs (stringsP[n].pointer, filePointerNew);
-        fputc ('\n', filePointerNew);
-    }
-
-    StrPrint (nStrings, stringsP/*strPointer, stringSizeP*/);
+    StrPrint (nStrings, stringsP);
 }
 
 void PrintSymbols (char* textPointer, int const size)
 {
     for (size_t i = 0; i < size; i++)
     {
-        //printf ( "%c",    textPointer[i]);
         Putchar (textPointer[i]);
         printf ("(%d)\n", textPointer[i]);
     }

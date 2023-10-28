@@ -6,11 +6,11 @@
 
 #include "struct.h"
 
-void StrPrint (int const nStrings, struct Strings* stringP/*char** const strPointer, int* stringSizeP*/);
+void StrPrint (int const nStrings, struct Strings* const stringP);
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/);
+void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod, char* fileName);
 
-void SortedStrPrintEnding (int const nStrings, struct Strings* stringsP/*char** const strPointer, int* stringSizeP*/);
+void SortedStrPrintEnding (int const nStrings, struct Strings* stringsP);
 
 void PrintSymbols (char* textPointer, int const size);
 

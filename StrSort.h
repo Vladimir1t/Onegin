@@ -7,13 +7,13 @@
 
 #include "struct.h"
 
-#define Swap(a, b) do { char* c = a; a = b; b = c; }  while (0)
-#define SwapSize(x, y) { int d = x; x = y; y = d; }
+//#define Swap(a, b) do { char* c = a; a = b; b = c; }  while (0)
+//#define SwapSize(x, y) { int d = x; x = y; y = d; }
 
-void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/);
+void StrSort (struct Strings* stringsP, int nStrings, int const mod);
 
 int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2);
 
-void StrSortEnding (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/);
+template <class X> void Swap (X &a, X &b);
 
 #endif // STRSORT_H_INCLUDED

@@ -4,7 +4,7 @@ int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2
 void StrSortEnding (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/);
 
 
-void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/)
+void StrSort (struct Strings* stringsP, int nStrings, int const mod)
 {
     //assert (stringSizeP != NULL);
     assert (stringsP != NULL);
@@ -16,9 +16,10 @@ void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings 
         unsigned int count = 0;
         for (int i = 0; i < nStrings - pass - 1; i++)
         {
-            if (strcmp (stringsP[i].pointer, string[i + 1]) > 0)
+            if (mstrcmp (stringsP[i].pointer, stringsP[i + 1].pointer) > 0)
             {
-                Swap (strPointer[i], strPointer[i + 1]);
+                Swap (stringsP[i].pointer, stringsP[i + 1].pointer);
+                SwapSize (stringsP[i].size, stringsP[i + 1].size);
                 printf ("str[%d] <-> str[%d]\n", i + 1, i + 2);
                 count++;
             }
@@ -28,10 +29,10 @@ void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings 
     }
 }
 
-void StrSortEnding (char** const strPointer, int nStrings, int* stringSizeP)
+void StrSortEnding (struct Strings* stringsP, int nStrings)
 {
-    assert (strPointer != NULL);
-    assert (stringSizeP != NULL);
+    assert (stringsP != NULL);
+
     printf ("<< the second type of sorting >>\n");
     for (int pass = 0; pass < nStrings; pass++)
     {
@@ -39,11 +40,11 @@ void StrSortEnding (char** const strPointer, int nStrings, int* stringSizeP)
         unsigned int count = 0;
         for (int i = 0; i < nStrings - pass - 1; i++)
         {
-            if (StrcmpEnding (strPointer[i], stringSizeP[i],
-                              strPointer[i + 1], stringSizeP[i + 1]) > 0)
+            if (StrcmpEnding (stringsP[i].pointer, stringsP[i].size,
+                              stringsP[i + 1].pointer, stringsP[i + 1].size) > 0)
             {
-                Swap (strPointer[i], strPointer[i + 1]);
-                SwapSize (stringSizeP[i], stringSizeP[i + 1]);
+                Swap (stringsP[i].pointer, stringsP[i + 1].pointer);
+                SwapSize (stringsP[i].size, stringsP[i + 1].size);
                 printf ("str[%d] <-> str[%d]\n", i + 1, i + 2);
                 count++;
             }

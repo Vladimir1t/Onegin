@@ -1,10 +1,9 @@
 #include "StrSort.h"
 
 int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2);
-void StrSortEnding (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/);
+template <class X> void Swap (X &a, X &b);
 
-
-void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/)
+void StrSort (struct Strings* stringsP, int nStrings, int const mod)
 {
     //assert (stringSizeP != NULL);
     assert (stringsP != NULL);
@@ -16,9 +15,12 @@ void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings 
         unsigned int count = 0;
         for (int i = 0; i < nStrings - pass - 1; i++)
         {
-            if (strcmp (stringsP[i].pointer, stringsP[i + 1].pointer) > 0)
+            if ((mod == BEGINNING && strcmp (stringsP[i].pointer, stringsP[i + 1].pointer) > 0) ||
+                 (mod == ENDING && StrcmpEnding (stringsP[i].pointer, stringsP[i].size,
+                 stringsP[i + 1].pointer, stringsP[i + 1].size) > 0))
             {
                 Swap (stringsP[i].pointer, stringsP[i + 1].pointer);
+                Swap (stringsP[i].size, stringsP[i + 1].size);
                 printf ("str[%d] <-> str[%d]\n", i + 1, i + 2);
                 count++;
             }
@@ -28,10 +30,10 @@ void StrSort (/*char** const strPointer*/struct Strings* stringsP, int nStrings 
     }
 }
 
-void StrSortEnding (/*char** const strPointer*/struct Strings* stringsP, int nStrings /*int* stringSizeP*/)
+/*void StrSortEnding (struct Strings* stringsP, int nStrings)
 {
     assert (stringsP != NULL);
-    //assert (stringSizeP != NULL);
+
     printf ("<< the second type of sorting >>\n");
     for (int pass = 0; pass < nStrings; pass++)
     {
@@ -51,7 +53,7 @@ void StrSortEnding (/*char** const strPointer*/struct Strings* stringsP, int nSt
         if (count == 0)
             break;
     }
-}
+} */
 
 int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2)
 {
@@ -62,18 +64,24 @@ int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2
         if (str1[sizeStr1 - pos] > str2[sizeStr2 - pos])
         {
             printf ("1) %c  2) %c\n", str1[sizeStr1 - pos], str2[sizeStr2 - pos]);
-            //printf ("> different: %d\n", pos);
             return 1;
         }
         else if (str1[sizeStr1 - pos] < str2[sizeStr2 - pos])
         {
             printf ("1) %c  2) %c\n", str1[sizeStr1 - pos], str2[sizeStr2 - pos]);
-            //printf ("< different: %d\n", pos);
             return -1;
         }
     }
     if (sizeStr2 > sizeStr1)
         return 1;
     return 0;
+}
+
+template <class X> void Swap (X &a, X &b)
+{
+    X temp;
+    temp = a;
+    a = b;
+    b = temp;
 }
 
