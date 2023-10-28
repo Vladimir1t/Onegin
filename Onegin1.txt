@@ -1,7 +1,7 @@
-I love my cat
-My cat is grey
 But he lives in stock
-It is warm and fat
 He likes to play
+I love my cat
+It is warm and fat
+My cat is grey
 My dog can't talk
 end   z

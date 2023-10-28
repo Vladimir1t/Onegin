@@ -35,11 +35,11 @@ int main(int argc, char* argv[])
     PrintSymbols (textPointer, size);                                // prints all symbols from the file.txt
 
     size_t nStrings = StringsCount (textPointer, size);              // counts the number of strings
-     
+
     //char** strPointer  = (char**) calloc (nStrings, sizeof(char*));
 
     //int*   stringSizeP = (int*)   calloc (nStrings, sizeof(int));
-     
+
     struct Strings* stringsP = (Strings*) calloc (nStrings, sizeof(Strings));
 
     StringsPointerRead (stringsP, textPointer, size, nStrings);    // puts strings in array
@@ -54,6 +54,7 @@ int main(int argc, char* argv[])
 
     printf ("main close");
 }
+
 
 
 

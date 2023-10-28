@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-int FileMeasure (FILE* fPointer); // we don't need to write const
+int FileSize (FILE* fPointer, int const startPosition);
 
 #endif // FILEMEASURE_H_INCLUDED

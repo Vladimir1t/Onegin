@@ -1,6 +1,0 @@
-#ifndef FILEMEASURE_H_INCLUDED
-#define FILEMEASURE_H_INCLUDED
-
-int FileMeasure (FILE* fPointer);
-
-#endif // FILEMEASURE_H_INCLUDED
