@@ -1,0 +1,8 @@
+#include "Destruct.h"
+
+void Destruct (struct Strings* stringsP, char* textPointer)
+{
+    free (stringsP);
+    free (textPointer);
+    pri
+}

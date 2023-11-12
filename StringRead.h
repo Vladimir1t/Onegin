@@ -5,18 +5,17 @@
 #include <assert.h>
 #include <string.h>
 
-#include "struct.h"
+#include "StringStruct.h"
 
-enum yesNo
+enum fileFormat
 {
     YES       =  1,
     NO        =  0,
     UNDEFINED = -1,
 };
 
-int StringsCount (char* const textPointer, size_t const size, size_t* nStrings);
+int StringsCount        (struct Strings* StrP);
 
-void StringsPointerRead (struct Strings* stringsP, char* const textPointer,
-                         size_t const size, int const nStrings, int const isR);
+void StringsPointerRead (struct Strings* StrP, const int isR);
 
 #endif // STRINGREAD_H_INCLUDED

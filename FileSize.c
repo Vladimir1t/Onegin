@@ -1,15 +1,16 @@
 #include "FileSize.h"
 
-int FileSize (FILE* const fPointer, int const startPosition)
+int FileSize (FILE* const fPointer)
 {
     assert (fPointer != NULL);
-    size_t len = 0;
 
-    rewind (fPointer);
+    int startPosition = ftell (fPointer);
+
     fseek (fPointer, 0, SEEK_END);
-    len = (size_t) ftell (fPointer);
+    size_t len = (size_t) ftell (fPointer);
 
     fseek (fPointer, startPosition, SEEK_SET);
 
     return len;
 }
+

@@ -5,15 +5,14 @@
 #include <string.h>
 #include <assert.h>
 
-#include "struct.h"
+#include "StringStruct.h"
 
-//#define Swap(a, b) do { char* c = a; a = b; b = c; }  while (0)
-//#define SwapSize(x, y) { int d = x; x = y; y = d; }
+void StrSort     (struct Strings* StrP, int (*comperator)(String*, String*));
 
-void StrSort (struct Strings* stringsP, int nStrings, int const mod);
+int StrcmpEnding (struct String* stringsP1, struct String* stringsP2);
 
-int StrcmpEnding (char* str1, int const sizeStr1, char* str2, int const sizeStr2);
+int Strcmp       (struct String* stringsP1, struct String* stringsP2);
 
-template <class X> void Swap (X &a, X &b);
+void SwapString  (struct String* stringsP1, struct String* stringsP2);
 
 #endif // STRSORT_H_INCLUDED

@@ -1,0 +1,20 @@
+#ifndef STRUCT_H_INCLUDED
+#define STRUCT_H_INCLUDED
+
+struct String
+{
+    char* pointer;
+    int   Strsize;
+    //char* textPointer;
+    //int   nStrings;
+};
+
+struct Str
+
+enum Sort
+{
+    BEGINNING = 1,
+    ENDING    = 0,
+};
+
+#endif // STRUCT_H_INCLUDED

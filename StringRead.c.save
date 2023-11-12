@@ -1,69 +1,75 @@
 #include "StringRead.h"
 
-void StringsPointerRead (struct Strings* stringsP, char* const textPointer, size_t const size, int const* nStrings,  int const isR);
+void StringsPointerRead (struct Strings* StrP, int const isR);
 
-int StringsCount (char* const textPointer, size_t const size, size_t* nStrings)
+int StringsCount (struct Strings* StrP)
 {
-    assert (textPointer != NULL);
-    yesNo isR = UNDEFINED;
+    assert (StrP->textPointer != NULL);
+    fileFormat isR = UNDEFINED;
 
-    for (size_t j = 0; j < size + 1; j++)
+    for (size_t j = 0; j < StrP->fileSize + 1; j++)
     {
-        if (textPointer[j] == '\r')
+        if (StrP->textPointer[j] == '\r')
         {
-            textPointer[j] = '\0';
-            (*nStrings)++;
-            isR = YES;
-            printf ("--%c--\n", textPointer[j - 1]);
+            StrP->textPointer[j] = '\0';
+            (StrP->nStrings)++;
             j++;
         }
-        else if (textPointer[j] == '\n' && textPointer[j - 1] != '\r')
+        else if (StrP->textPointer[j] == '\n')
         {
-            textPointer[j] = '\0';
-            (*nStrings)++;
-            isR = NO;
-            printf ("-%c-\n", textPointer[j - 1]);
+            StrP->textPointer[j] = '\0';
+            (StrP->nStrings)++;
         }
 
-        else if (textPointer[j] == '\0')
-            (*nStrings)++;
+        else if (StrP->textPointer[j] == '\0')
+            (StrP->nStrings)++;
     }
-    printf ("number of strings: %d\n", *nStrings);
-    printf ("r: %d\n", isR);
+    printf ("number of strings: %d\n", StrP->nStrings);
+
+    char* elementP = strchr(StrP->textPointer, '\0');
+    if (strP->nStrings > 1 && *(elementP + 1) == '\n')
+        isR = (strP->nStrings > 1 && *(elementP + 1) == '\n');
+    else
+        isR = NO;
 
     return isR;
 }
 
-void StringsPointerRead (struct Strings* stringsP, char* const textPointer,
-                         size_t const size, int const nStrings, int const isR)
+void StringsPointerRead (struct Strings* StrP, const int isR)
 {
-    assert (stringsP != NULL);
-    assert (textPointer != NULL);
+    assert (StrP->stringsP    != NULL);
+    assert (StrP->textPointer != NULL);
 
-    size_t n = 0;
-    stringsP[n].pointer = textPointer;
-    printf ("address of 1 string: %d\n", stringsP[n].pointer);
+    size_t n = 0, stringLen = 0;
+    StrP->stringsP[n].pointer = StrP->textPointer;
+    printf ("address of 1 string: %d\n", StrP->stringsP[n].pointer);
     n++;
 
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i < StrP->fileSize; i++)
     {
-        if (textPointer[i] == '\0' && n < nStrings && isR == YES)
+        if (StrP->textPointer[i] == '\0' && n < StrP->nStrings)
         {
-            stringsP[n].pointer = textPointer + (i + 2);
-            printf ("address of %d string: %d\n", n + 1, stringsP[n].pointer);
-            stringsP[n - 1].size = stringsP[n].pointer - stringsP[n - 1].pointer - 2;
-            //printf ("Size(%d) %d\n", n - 1, stringsP[n - 1].size);
+            if (isR == YES)
+            {
+                StrP->stringsP[n].pointer = StrP->textPointer + (i + 2);
+                //printf ("Size(%d) %d\n", n - 1, StrP->stringsP[n - 1].size);
+                i+=2;
+            }
+            else if (isR == NO)
+            {
+                StrP->stringsP[n].pointer = StrP->textPointer + (i + 1);
+                i++;
+            }
+            printf ("address of %d string: %d\n", n + 1, StrP->stringsP[n].pointer);
+            StrP->stringsP[n - 1].size = stringLen;
+            //printf ("Size(%d) %d\n", n - 1, StrP->stringsP[n - 1].size);
             n++;
+            stringLen = 0;
         }
-        if (textPointer[i] == '\0' && n < nStrings && isR == NO)                  // if there are '\r'
-        {
-            stringsP[n].pointer = textPointer + (i + 1);
-            printf ("address of %d string: %d\n", n + 1, stringsP[n].pointer);    // if there are no '\r'
-            stringsP[n - 1].size = stringsP[n].pointer - stringsP[n - 1].pointer - 1;
-            printf ("Size(%d) %d\n", n, stringsP[n - 1].size);
-            n++;
-        }
+
+        else if (StrP->textPointer[i] == '\0' && n == StrP->nStrings)
+            StrP->stringsP[n - 1].size = stringLen;
+
+    stringLen++;
     }
-    stringsP[n - 1].size = strlen (stringsP[n - 1].pointer);
-    printf ("Size(%d) %d\n", n, stringsP[n - 1].size);
 }

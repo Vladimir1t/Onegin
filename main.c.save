@@ -8,47 +8,55 @@
 #include "StringRead.h"
 #include "StrSort.h"
 #include "StrPrint.h"
-#include "struct.h"
+#include "StringStruct.h"
+#include "Destruct.h"
 
 int main(int argc, char* argv[])
 {
     printf ("main open\n");
-    FILE* const fileP = fopen (argv[1], "rb");                     // gets the fileName from command line
+    struct Strings Str = {};
+
+    FILE* const fileP = fopen (argv[1], "rb");         // gets the fileName from command line
     assert (fileP != NULL);
 
-    size_t size = 0;
-    size = FileSize (fileP, ftell(fileP));
-    printf ("size of file: %d\n", size);                           // measures the size of a text
+    Str.fileSize = FileSize (fileP, ftell(fileP));
+    printf ("size of file: %d\n", Str.fileSize);       // measures the size of a text
 
-    char* textPointer = (char*) calloc (size + 1, sizeof(char));
+    Str.textPointer = (char*) calloc (Str.fileSize + 1, sizeof(char));
 
-    size_t factualSize = fread (textPointer, sizeof(char), size, fileP);
-    if (factualSize != size)
-        {
-            printf ("Error.\n");
-            return 0;
-        }
+    size_t factualSize = fread (Str.textPointer, sizeof(char), Str.fileSize, fileP);
+    if (factualSize != Str.fileSize)
+    {
+        printf ("Error. Wrong size of file\n");
+        return 0;
+    }
     fclose (fileP);
-    //FileReadingCheck (fileP, factualSize);
+
     printf ("factual size: %d\n", factualSize);
 
-    PrintSymbols (textPointer, size);                               // prints all symbols from the file.txt
+    PrintSymbols (&Str);                               // prints all symbols from the file.txt
 
     size_t nStrings = 0;
-    int const isR = StringsCount (textPointer, size, &nStrings);    // counts the number of strings and check if there are '\r'
+    int const isR = StringsCount (&Str);               // counts the number of strings and check if there are '\r'
 
-    struct Strings* stringsP = (Strings*) calloc (nStrings, sizeof(Strings));
+    Str.stringsP = (String*) calloc (Str.nStrings, sizeof(Strings));
 
-    StringsPointerRead (stringsP, textPointer, size, nStrings, isR); // puts strings in array
+    StringsPointerRead (&Str, isR);                    // puts strings in array
 
-    StrPrint (nStrings, stringsP);                                   // prints unsorted strings
+    StrPrint (&Str);                                   // prints unsorted strings
 
-    StrSort (stringsP, nStrings, BEGINNING);                         // sorts string by alphabetic order
-    SortedStrPrint (nStrings, stringsP, BEGINNING, argv[2]);         // prints sorted strings and put them in file onegin1.txt
+    StrSort (&Str, Strcmp);                            // sorts string by alphabetic order
+    SortedStrPrint (&Str, BEGINNING, argv[2]);         // prints sorted strings and put them in file onegin1.txt
 
-    StrSort (stringsP, nStrings, ENDING);                                    // sorts string by alphabetic order of their endings
-    SortedStrPrint (nStrings, stringsP, ENDING, argv[3]);            // prints sorted string and put them in file onegin2.txt
+    StrSort (&Str, StrcmpEnding);                      // sorts string by alphabetic order of their endings
+    SortedStrPrint (&Str, ENDING, argv[3]);            // prints sorted string and put them in file onegin2.txt
 
+    for (int i = 0; i < Str.nStrings; i++)
+    {
+    
+    }
+    //printf ("%s", Str.textPointer);
+    ClearMemory (&Str);
     printf ("main close");
 }
 

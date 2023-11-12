@@ -1,10 +1,18 @@
 #ifndef STRUCT_H_INCLUDED
 #define STRUCT_H_INCLUDED
 
-struct Strings
+struct String
 {
     char* pointer;
-    int size;
+    int   size;
+};
+
+struct Strings
+{
+    String* stringsP;
+    char*   textPointer;
+    int     fileSize;
+    int     nStrings;
 };
 
 enum Sort

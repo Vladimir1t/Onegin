@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "struct.h"
+#include "StringStruct.h"
 
-void StrPrint (int const nStrings, struct Strings* const stringP);
+void StrPrint             (struct Strings* StrP);
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod, char* fileName);
+void SortedStrPrint       (struct Strings* StrP, int const mod, char* fileName);
 
-void SortedStrPrintEnding (int const nStrings, struct Strings* stringsP);
+void SortedStrPrintEnding (struct Strings* StrP);
 
-void PrintSymbols (char* textPointer, int const size);
+void PrintSymbols         (struct Strings* StrP);
 
 #endif // STRPRINT_H_INCLUDED

@@ -1,21 +1,18 @@
 #include "StrPrint.h"
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod);
-void PrintSymbols (char* textPointer, int const size);
-void Putchar (char a);
+void SortedStrPrint (struct Strings* StrP, int const mod);
+void PrintSymbols   (struct Strings* StrP);
+void Putchar        (char a);
 
-void StrPrint (int const nStrings, struct Strings* const stringsP)
+void StrPrint (struct Strings* StrP)
 {
-    for (size_t n = 0; n < nStrings; n++)
-    {
-        printf ("%d) %s\n", n + 1, stringsP[n].pointer);
-        //printf ("string length: %d\n", stringsP[n].size);
-    }
+    for (size_t n = 0; n < StrP->nStrings; n++)
+        printf ("%d) %s\n", n + 1, StrP->stringsP[n].pointer);
 }
 
-void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod, char* fileName)
+void SortedStrPrint (struct Strings* StrP, int const mod, char* fileName)
 {
-    FILE* filePointerNew = fopen (fileName, "w");   // get name from command line
+    FILE* filePointerNew = fopen (fileName, "w");               // get a name of file from command line
     if (mod == BEGINNING)
         printf ("-Strings are sorted by the alphabetic order-\n");
     else if (mod == ENDING)
@@ -23,21 +20,22 @@ void SortedStrPrint (int const nStrings, struct Strings* stringsP, int const mod
     else
         printf ("Error.");
 
-    for (int n = 0; n < nStrings; n++)
+    for (int n = 0; n < StrP->nStrings; n++)
     {
-        fputs (stringsP[n].pointer, filePointerNew);
+        fputs (StrP->stringsP[n].pointer, filePointerNew);
+        fputc ('\r', filePointerNew);
         fputc ('\n', filePointerNew);
     }
 
-    StrPrint (nStrings, stringsP);
+    StrPrint (StrP);
 }
 
-void PrintSymbols (char* textPointer, int const size)
+void PrintSymbols (struct Strings* StrP)
 {
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i < StrP->fileSize; i++)
     {
-        Putchar (textPointer[i]);
-        printf ("(%d)\n", textPointer[i]);
+        Putchar (StrP->textPointer[i]);
+        printf ("(%d)\n", StrP->textPointer[i]);
     }
 }
 
