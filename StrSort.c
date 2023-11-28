@@ -2,7 +2,7 @@
 
 int StrcmpEnding (struct String* stringsP1, struct String* stringsP2);
 int Strcmp       (struct String* stringsP1, struct String* stringsP2);
-void SwapString  (struct String* stringsP1, struct String* stringsP2);
+void Swap        (void* a, void* b, int nBytes);
 
 void StrSort (struct Strings* StrP, int (*comperator) (String*, String*))
 {
@@ -17,7 +17,9 @@ void StrSort (struct Strings* StrP, int (*comperator) (String*, String*))
         {
             if (comperator (&StrP->stringsP[i], &StrP->stringsP[i + 1]) > 0)
             {
-                SwapString (&StrP->stringsP[i], &StrP->stringsP[i + 1]);
+                SwapString (&StrP->stringsP[i], &StrP->stringsP[i + 1], sizeof(&StrP->stringsP[0]));
+
+                //Swap (&StrP->stringsdata, )
 
                 printf ("str[%d] <-> str[%d]\n", i + 1, i + 2);
                 count++;
@@ -73,11 +75,18 @@ int Strcmp (struct String* stringsP1, struct String* stringsP2)
     return 0;
 }
 
-void SwapString (struct String* stringsP1, struct String* stringsP2)
+void Swap (void* a, void* b, int nBytes)
 {
-    struct String pointer = *stringsP1;
-    *stringsP1 = *stringsP2;
-    *stringsP2 = pointer;
+    (char*) a1 = (char*) a;
+    (char*) b1 = (char*) b;
+    unsigned char c = 0;
+
+    for (int i = 0; i < nBytes, i++)
+    {
+        c = a1[i];
+            a1[i] = b1[i];
+                    b1[i] = c;
+    }
 }
 
 

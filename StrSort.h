@@ -13,6 +13,6 @@ int StrcmpEnding (struct String* stringsP1, struct String* stringsP2);
 
 int Strcmp       (struct String* stringsP1, struct String* stringsP2);
 
-void SwapString  (struct String* stringsP1, struct String* stringsP2);
+void Swap        (void* a, void* b, int nBytes);
 
 #endif // STRSORT_H_INCLUDED
