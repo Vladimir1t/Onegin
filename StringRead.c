@@ -1,6 +1,6 @@
 #include "StringRead.h"
 
-void StringsPointerRead (struct Strings* StrP, int const isR);
+void StringsPointerRead (struct Strings* StrP, fileFormat isR);
 
 int StringsCount (struct Strings* StrP)
 {
@@ -26,13 +26,13 @@ int StringsCount (struct Strings* StrP)
     }
     printf ("number of strings: %d\n", StrP->nStrings);
 
-    char* elementP = strchr(StrP->textPointer, '\0');
+    char* elementP = strchr (StrP->textPointer, '\0');
     isR = (strP->nStrings > 1 && *(elementP + 1) == '\n');
 
     return isR;
 }
 
-void StringsPointerRead (struct Strings* StrP, const int isR)
+void StringsPointerRead (struct Strings* StrP, fileForemat isR)
 {
     assert (StrP->stringsP    != NULL);
     assert (StrP->textPointer != NULL);

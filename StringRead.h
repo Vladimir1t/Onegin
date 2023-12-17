@@ -14,8 +14,8 @@ enum fileFormat
     UNDEFINED = -1,
 };
 
-int StringsCount        (struct Strings* StrP);
+int StringsCount (struct Strings* StrP);
 
-void StringsPointerRead (struct Strings* StrP, const int isR);
+void StringsPointerRead (struct Strings* StrP, fileFormat isR);
 
 #endif // STRINGREAD_H_INCLUDED
